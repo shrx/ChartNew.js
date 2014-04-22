@@ -1,5 +1,4 @@
 
-
 /*
  * ChartNew.js
  * 
@@ -3650,8 +3649,6 @@ window.Chart = function (context) {
 
             ctx.lineWidth = config.barStrokeWidth;
             for (var i = 0; i < data.datasets.length; i++) {
-                ctx.fillStyle = data.datasets[i].fillColor;
-                ctx.strokeStyle = data.datasets[i].strokeColor;
                 if (animPc >= 1) {
                     if (typeof (data.datasets[i].title) == "string") lgtxt = data.datasets[i].title.trim();
                     else lgtxt = "";
@@ -3659,6 +3656,8 @@ window.Chart = function (context) {
                 for (var j = 0; j < data.datasets[i].data.length; j++) {
                   if (!(typeof(data.datasets[i].data[j])=='undefined')) {
                     var barOffset = xAxisPosY + config.barValueSpacing - scaleHop * (j + 1) + barWidth * i + config.barDatasetSpacing * i + config.barStrokeWidth * i;
+                    ctx.fillStyle = cycleColor(data.datasets[i].fillColor, j);
+                    ctx.strokeStyle = cycleColor(data.datasets[i].strokeColor, j);
                     ctx.beginPath();
                     //            ctx.moveTo(yAxisPosX, barOffset);
                     ctx.moveTo(yAxisPosX + zeroY, barOffset);
